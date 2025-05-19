@@ -1,5 +1,9 @@
 package com.techlab.productos;
 
+import com.techlab.excepciones.NombreNuloOVacioException;
+import com.techlab.excepciones.PrecioInvalidoException;
+import com.techlab.excepciones.StockNegativoException;
+
 public class Producto {
     private static int contador = 1;
 
@@ -12,7 +16,7 @@ public class Producto {
         this.id = contador++;
         this.nombre = nombre;
         this.precio = precio;
-        this.setStock(stock); // Solo una llamada a setStock
+        this.setStock(stock);
     }
 
     public int getId() {
@@ -36,32 +40,62 @@ public class Producto {
     }
 
     public void setNombre(String nombre) {
-        if (nombre != null && !nombre.isEmpty()) {
+        try {
+            if (nombre == null || nombre.isEmpty()) {
+                throw new NombreNuloOVacioException("El nombre no puede ser nulo o vacío.");
+            }
             this.nombre = nombre;
-        } else {
-            System.out.println("El nombre no puede ser nulo o vacío."); // Revertido
+        } catch (NombreNuloOVacioException e) {
+            System.out.println(e.getMessage());
+            throw e;
         }
     }
 
     public void setPrecio(double precio) {
-        if (precio >= 0) {
+        try {
+            if (precio < 0) {
+                throw new PrecioInvalidoException("El precio no puede ser negativo.");
+            }
             this.precio = precio;
-        } else {
-            System.out.println("El precio no puede ser negativo."); // Revertido
+        } catch (PrecioInvalidoException e) {
+            System.out.println(e.getMessage());
+            throw e;
         }
     }
 
     public void setStock(int stock) {
-        if (stock >= 0) {
+        try {
+            if (stock < 0) {
+                throw new StockNegativoException("El stock no puede ser negativo.");
+            }
             this.stock = stock;
+        } catch (StockNegativoException e) {
+            System.out.println(e.getMessage());
+            throw e;
+        }
+    }
+
+    public static int getContador() {
+        return contador;
+    }
+
+    public static void incrementarContador() {
+        contador++;
+    }
+
+    public static boolean esAlcoholica(String entrada) {
+        if (entrada.equalsIgnoreCase("s")) {
+            return true;
+        } else if (entrada.equalsIgnoreCase("n")) {
+            return false;
         } else {
-            System.out.println("El stock no puede ser negativo."); // Revertido
+            throw new IllegalArgumentException("Entrada inválida. Debe ser 's' o 'n'.");
         }
     }
 
     @Override
     public String toString() {
-        return String.format("%-5d %-20s %-10.2f %-10d", id, nombre, precio, stock); // Formato tabular
+        return String.format("%-5d %-20s %-10.2f %-10d", id, nombre, precio, stock);
     }
 
 }

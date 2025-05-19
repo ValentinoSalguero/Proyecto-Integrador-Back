@@ -1,15 +1,19 @@
 package com.techlab.pedidos;
 
-import com.techlab.productos.Producto;
-
 import java.util.ArrayList;
 import java.util.List;
+
+import com.techlab.productos.Producto;
+import com.techlab.excepciones.StockInsuficienteException;
 
 public class Pedido {
     private List<LineaPedido> lineas;
     private double total;
+    private static int contadorPedidos = 1;
+    private int id;
 
     public Pedido() {
+        this.id = contadorPedidos++;
         this.lineas = new ArrayList<>();
         this.total = 0.0;
     }
@@ -27,13 +31,13 @@ public class Pedido {
             producto.setStock(producto.getStock() - cantidad);
             System.out.println("Producto agregado: " + producto.getNombre() + " x " + cantidad);
         } else {
-            System.out.println("No hay suficiente stock de " + producto.getNombre()); // Revertido
+            throw new StockInsuficienteException("No hay suficiente stock de " + producto.getNombre());
         }
     }
 
     public void mostrarPedido() {
         if (lineas.isEmpty()) {
-            System.out.println("El pedido está vacío."); // Revertido
+            System.out.println("El pedido está vacío.");
         } else {
             System.out.println("--- Detalles del Pedido ---");
             System.out.printf("%-20s %-10s %-10s\n", "Producto", "Cantidad", "Subtotal");
@@ -47,6 +51,10 @@ public class Pedido {
 
     public double getTotal() {
         return total;
+    }
+
+    public int getId() {
+        return id;
     }
 
     private class LineaPedido {
@@ -71,12 +79,6 @@ public class Pedido {
                 ", cantidad=" + cantidad + 
                 ", subtotal=" + subtotal +
                 '}';
-        }
-    }
-
-    public static class StockInsuficienteException extends RuntimeException {
-        public StockInsuficienteException(String mensaje) {
-            super(mensaje);
         }
     }
 
