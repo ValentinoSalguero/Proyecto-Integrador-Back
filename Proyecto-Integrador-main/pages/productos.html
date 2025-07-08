@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link href="/Proyecto-Integrador-main/css/styles.css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet" />
+    <link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/boxicons@2.1.1/css/boxicons.min.css"
+    />
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    />
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"
+        rel="stylesheet"
+    />
+    <title>Dulce Alfajor - Productos</title>
+</head>
+
+<body>
+    <header>
+        <h1>Dulce Alfajor</h1>
+        <label class="switch">
+            <input type="checkbox" id="input" />
+            <span class="slider"></span>
+        </label>
+        <div class="header-btn-container">
+            <button id="open-cart" class="btn-cart">
+                <i class="fas fa-shopping-cart"></i>
+                </button>
+        </div>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <div class="container-fluid">
+                <button
+                    class="navbar-toggler"
+                    type="button"
+                    data-bs-toggle="collapse"
+                    data-bs-target="#navbarNav"
+                    aria-controls="navbarNav"
+                    aria-expanded="false"
+                    aria-label="Toggle navigation"
+                >
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <a class="nav-link" href="../index.html">Inicio</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="reseñas.html">Reseñas</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="contacto.html">Contacto</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="../menu.html">Menú</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main class="container mt-4"> <h2 class="text-center mb-4">Nuestros Productos</h2>
+
+        <div id="card-container" class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+            </div>
+    </main>
+
+    <div id="cart-sidebar" class="cart-sidebar">
+        <div class="cart-header">
+            <h2>Carrito de Compras</h2>
+            <button id="close-cart" class="close-cart">&times;</button>
+        </div>
+        <div id="cart-container">
+            </div>
+        <div class="cart-footer">
+            <button id="empty-button">Vaciar Carrito</button>
+            <button id="checkout-button">Finalizar Compra</button>
+        </div>
+    </div>
+
+    <div id="success-modal" class="success-modal">
+        <div class="modal-content">
+            <h1>¡Compra Realizada con éxito!</h1>
+            <p>Gracias por su compra</p>
+            <button id="close-success-modal">Cerrar</button>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2024 Dulce Alfajor. Todos los derechos reservados.</p>
+        <div class="social-media">
+            <a href="#"><i class="fab fa-facebook"></i></a>
+            <a href="#"><i class="fab fa-twitter"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+        </div>
+    </footer>
+
+    <script src="/Proyecto-Integrador-main/js/scripts.js"></script>
+    <script src="/Proyecto-Integrador-main/js/productos.js"></script> 
+    <script src="/Proyecto-Integrador-main/js/carrito.js"></script>
+    <script
+        src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+    ></script>
+</body>
+
+</html>
