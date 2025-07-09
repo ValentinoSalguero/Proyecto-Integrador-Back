@@ -1,64 +1,101 @@
-# Proyecto-Integrador-Back
+Proyecto-Integrador-Back
+Descripción del Proyecto
+Este proyecto es la pre-entrega de un sistema básico de gestión, desarrollado en Java utilizando Spring Boot y MySQL. A través de él, pude aplicar y consolidar mis conocimientos en Programación Orientada a Objetos (POO), el manejo de colecciones, excepciones y la organización del código, así como la implementación de una API RESTful para un sistema de E-commerce.
 
----
+Objetivo General
+Desarrollar una API RESTful completa en Java utilizando Spring Boot y MySQL para gestionar un sistema de E-commerce, integrándose con una aplicación frontend. La aplicación deberá aplicar correctamente conceptos avanzados de programación en Java, arquitectura REST, bases de datos relacionales, validaciones, excepciones y organización modular.
 
-## Descripción de Mi Proyecto
+Estructura del Proyecto
+El proyecto está organizado en las siguientes áreas clave:
 
-Este proyecto es mi **pre-entrega de un sistema básico de gestión**, desarrollado en **Java**. A través de él, pude aplicar y consolidar mis conocimientos en Programación Orientada a Objetos (POO), el manejo de colecciones, excepciones y la organización del código.
+Java: Se utilizaron conceptos fundamentales de Java, como tipos de datos, variables, y operadores aritméticos, lógicos y relacionales en las funciones de cálculo y validación. Se emplean variables de tipo int (para cantidades e IDs), double (para precios), String (para nombres/descripciones), y boolean.
 
-## Estructura de Mi Proyecto
+Programación Orientada a Objetos (POO): Se implementaron clases (Producto, Pedido, Categoria), objetos, encapsulamiento, así como herencia y polimorfismo para extender funcionalidades.
 
-Organicé mi proyecto en las siguientes áreas clave:
+Colecciones: Se utilizaron ArrayList para manejar productos y ArrayList<LineaPedido> para los productos dentro de un pedido.
 
-* **Java**: Utilicé conceptos fundamentales de Java, como tipos de datos, variables, operadores aritméticos, lógicos y relacionales.
-* **Programación Orientada a Objetos (POO)**: Implementé **clases** (`Producto`, `Pedido`), **objetos**, **encapsulamiento**, así como **herencia** y **polimorfismo** para extender funcionalidades.
-* **Colecciones**: Usé `ArrayList` para gestionar colecciones de productos y pedidos.
-* **Manejo de Excepciones**: Implementé bloques `try/catch` para manejar errores comunes y también creé excepciones personalizadas.
-* **Organización de Código**: Estructuré mi código en **paquetes lógicos** para mejorar la modularidad y facilitar el mantenimiento.
+Manejo de Excepciones: Se implementaron bloques try/catch para manejar errores comunes (por ejemplo, NumberFormatException al convertir datos) y se crearon excepciones personalizadas como StockInsuficienteException.
 
-## Requisitos Cumplidos
+Organización de Código: El código está estructurado en paquetes lógicos para mejorar la modularidad y facilitar el mantenimiento, incluyendo com.techlab.productos, com.techlab.pedidos, com.techlab.excepciones, y com.techlab.categorias.
 
-### Estructura y POO
-* Desarrollé clases clave como `Producto` (con `id`, `nombre`, `precio`, `stock`, `getters` y `setters`) y `Pedido` (con `id`, una lista de productos/líneas y métodos para calcular el total).
-* Mi clase `Main` se encarga de orquestar el menú interactivo y delega la lógica de negocio a servicios específicos.
+Spring Boot: Utilizado para construir la API RESTful.
 
-### Gestión de Productos
-* **Ingreso de Productos**: Mi sistema permite agregar productos solicitando su nombre, precio y cantidad en stock.
-* **Visualización de Productos**: Muestra una lista detallada de todos los productos registrados, incluyendo su ID, nombre, precio y stock.
-* **Búsqueda y Actualización**: Puedo buscar productos por nombre o ID, mostrar su información y actualizar su precio o stock con las validaciones necesarias.
-* **Eliminación de Productos**: Mi sistema posibilita la eliminación de productos por ID o posición, con la opción de pedir confirmación.
+MySQL: Base de datos relacional para persistir los datos.
 
-### Gestión de Pedidos
-* **Creación de Pedidos**: Puedo crear pedidos nuevos, seleccionando productos y sus cantidades.
-    * **Validación de Stock**: Verifico la disponibilidad de stock antes de confirmar un pedido.
-    * **Cálculo de Costo Total**: Calculo el valor total de cada pedido.
-    * **Actualización de Stock**: Descuento el stock de los productos una vez que el pedido es confirmado.
-* **Listado de Pedidos**: Tengo una funcionalidad para visualizar los pedidos que he realizado, su costo y los productos asociados.
+JPA/Hibernate: Para la interacción con la base de datos a través de entidades.
 
-### Interfaz y Usabilidad
-* **Menú Principal Interactivo**: Mi programa presenta un menú de opciones claro y se repite hasta que decido salir.
+Requisitos Cumplidos
+Estructura y POO
+Se desarrollaron clases clave como Producto (con id, nombre, descripcion, precio, categoria, imagenUrl, stock, getters y setters) y Pedido (con id, usuarioId, fechaPedido, estado, una lista de LineaPedido y métodos para calcular el total).
 
-    ```
-    =================================== SISTEMA DE GESTIÓN - TECHLAB ==================================
-    1) Agregar producto
-    2) Listar productos
-    3) Buscar/Actualizar producto
-    4) Eliminar producto
-    5) Crear un pedido
-    6) Listar pedidos
-    7) Salir
+La clase Main (implícita en Spring Boot como aplicación principal) orquesta la ejecución, delegando la lógica de negocio a los servicios (ProductoService, PedidoService, CategoriaService).
 
-    Elija una opción:
-    ```
+Se implementó herencia en Producto (@Inheritance(strategy = InheritanceType.SINGLE_TABLE) y @DiscriminatorColumn) permitiendo la extensión a subclases si se deseara.
 
-## Ejemplo de Flujo de Uso (Mi Escenario)
+Gestión de Productos
+La API ofrece los siguientes endpoints para la gestión de productos:
 
-1.  Mi programa inicia y muestra el **menú principal**.
-2.  Yo selecciono la opción "1" para **Agregar Producto**, e ingreso el nombre, precio y stock. Se crea un objeto `Producto` y se añade a la lista.
-3.  Luego, selecciono la opción "2" para **Listar Productos**, y el sistema me muestra todos los productos con su ID, nombre, precio y stock.
-4.  Después, selecciono la opción "5" para **Crear Pedido**. El sistema me pregunta cuántos productos deseo agregar, y me pide el ID del producto y la cantidad.
-    * Si no hay suficiente stock, el sistema lanza una `StockInsuficienteException` o me muestra un mensaje adecuado.
-    * Si hay stock, se descuenta del inventario y se crea el pedido en la colección de pedidos.
-5.  Finalmente, selecciono la opción "7" para **Salir**, y el programa finaliza.
+Listar productos disponibles: GET /api/productos.
 
----
+Obtener detalles individuales de un producto: GET /api/productos/{id}.
+
+Agregar nuevos productos al catálogo: POST /api/productos. Los productos tienen atributos como ID, Nombre, Descripción, Precio, Categoría, Imagen (URL) y Stock.
+
+Actualizar información de productos existentes: PUT /api/productos/{id}. Se puede actualizar precio o stock, validando que los valores sean coherentes (ej. stock no negativo).
+
+Eliminar productos: DELETE /api/productos/{id}. El sistema permite eliminar un producto por su ID.
+
+Gestión de Categorías
+La API ofrece los siguientes endpoints para la gestión de categorías:
+
+Listar categorías disponibles: GET /api/categorias.
+
+Obtener detalles individuales de una categoría: GET /api/categorias/{id}.
+
+Agregar nuevas categorías: POST /api/categorias.
+
+Actualizar información de categorías existentes: PUT /api/categorias/{id}.
+
+Eliminar categorías: DELETE /api/categorias/{id}.
+
+Gestión de Pedidos
+La API ofrece los siguientes endpoints para la gestión de pedidos:
+
+Creación de Pedidos: POST /api/pedidos.
+
+Permite crear un pedido nuevo, solicitando productos y sus cantidades.
+
+Validación de Stock: Se verifica la disponibilidad de stock antes de confirmar un pedido, lanzando StockInsuficienteException si no hay suficiente.
+
+Cálculo de Costo Total: Calcula el valor total de cada pedido.
+
+Actualización de Stock: Disminuye el stock de los productos una vez que el pedido es confirmado.
+
+Listado de Pedidos: GET /api/pedidos para todos los pedidos, y GET /api/pedidos/usuario/{usuarioId} para pedidos por usuario.
+
+Confirmar Pedido: POST /api/pedidos/{id}/confirmar.
+
+Cambiar Estado del Pedido: PUT /api/pedidos/{id}/estado (permite gestionar estados como pendiente, confirmado, enviado, entregado, cancelado).
+
+Eliminar Pedido: DELETE /api/pedidos/{id}.
+
+Interfaz y Usabilidad (HTML - Requisitos para el Frontend)
+Aunque este es el repositorio del backend, el frontend posee un menú principal interactivo con las siguientes opciones:
+
+=================================== SISTEMA DE GESTIÓN - TECHLAB ==================================
+1) Gestionar Productos
+2) Gestionar Categorías
+3) Ver Carrito de Compras
+4) Realizar Pedido
+5) Consultar Historial de Pedidos
+6) Administración (usuarios y stock)
+7) Salir
+Además de una sección de "Gestión de Productos" con las siguientes opciones:
+
+=================================== ———————Gestion de Productos——————-==================================
+a) Agregar Producto
+b) Listar Productos
+c) Buscar Producto por ID
+d) Actualizar Producto
+e) Eliminar Producto
+f) Volver al menú principal
