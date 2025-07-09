@@ -49,16 +49,16 @@ public class ProductoController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> eliminar(@PathVariable int id) {
+    public ResponseEntity<String> eliminar(@PathVariable int id) {
         try {
             if (servicio.eliminar(id)) {
-                return ResponseEntity.noContent().build(); // 204 No Content
+                return ResponseEntity.noContent().build(); // 204 No Content 
             }
-            return ResponseEntity.notFound().build(); // 404 Not Found
+            return ResponseEntity.notFound().build(); // 404 Not Found 
         } catch (DataIntegrityViolationException e) {
-            return ResponseEntity.status(HttpStatus.CONFLICT).build(); // 409 Conflict
+            return ResponseEntity.status(HttpStatus.CONFLICT).body("No se puede eliminar el producto porque está siendo referenciado por otros registros (ej. pedidos).");
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build(); // 500 Internal Server Error
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Ocurrió un error interno al intentar eliminar el producto: " + e.getMessage());
         }
     }
 }
